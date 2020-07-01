@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,11 +15,21 @@ class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
   var _questions = [
-    "What's your faviourt color?",
-    "What's your faviourt animal?"
+    {
+      "questionText": "What's your faviourt color?",
+      "answers": ["Black", "Red", "Green", "White"]
+    },
+    {
+      "questionText": "What's your faviourt animal?",
+      "answers": ["Cat", "Dog", "Horse", "Tiger"]
+    },
+    {
+      "questionText": "Who's your faviourt teacher?",
+      "answers": ["Tech 1", "Tech 2", "Tech 3", "Tech 4"]
+    },
   ];
 
-  void _selectedAnswer(String answer) {
+  void _selectedAnswer() {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -33,21 +44,14 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: <Widget>[
-            Question(_questionIndex >= _questions.length
-                ? 'Done'
-                : _questions[_questionIndex]),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: () => _selectedAnswer("Answer 1"),
+            Question(
+              _questions[_questionIndex]['questionText'],
             ),
-            RaisedButton(
-              child: Text('Answer 2'),
-              onPressed: () => _selectedAnswer("Answer 2"),
-            ),
-            RaisedButton(
-              child: Text('Answer 3'),
-              onPressed: () => _selectedAnswer("Answer 3"),
-            )
+            ...(_questions[_questionIndex]['answers'] as List<String>)
+                .map(
+                  (answer) => Answer(_selectedAnswer, answer),
+                )
+                .toList()
           ],
         ),
       ),

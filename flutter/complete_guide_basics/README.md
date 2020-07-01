@@ -81,6 +81,29 @@ void main() {
 }
 ```
 
+### Ex-4
+
+```dart
+class Person {
+  String name;
+  int age;
+
+  Person({this.name, this.age});
+
+  Person.veryOld(this.name) {
+    age = 60;
+  }
+}
+
+void main() {
+  var p1 = Person(name: 'John', age: 30);
+  var p2 = Person.veryOld('Neo');
+  print(p1.age);
+  print(p2.name);
+  print(p2.age);
+}
+```
+
 ## It’s All Widgets!
 
 - AppBar
