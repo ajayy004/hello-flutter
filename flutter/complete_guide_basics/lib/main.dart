@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,26 +12,50 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _questionIndex = 0;
-
-  var _questions = [
+  final _questions = const [
     {
       "questionText": "What's your faviourt color?",
-      "answers": ["Black", "Red", "Green", "White"]
+      "answers": [
+        {"text": "Black", "score": 1},
+        {"text": "Red", "score": 2},
+        {"text": "Green", "score": 3},
+        {"text": "White", "score": 4}
+      ]
     },
     {
       "questionText": "What's your faviourt animal?",
-      "answers": ["Cat", "Dog", "Horse", "Tiger"]
+      "answers": [
+        {"text": "Cat", "score": 1},
+        {"text": "Dog", "score": 2},
+        {"text": "Horse", "score": 3},
+        {"text": "Tiger", "score": 4}
+      ]
     },
     {
       "questionText": "Who's your faviourt teacher?",
-      "answers": ["Tech 1", "Tech 2", "Tech 3", "Tech 4"]
+      "answers": [
+        {"text": "Tech 1", "score": 1},
+        {"text": "Tech 2", "score": 2},
+        {"text": "Tech 3", "score": 3},
+        {"text": "Tech 4", "score": 4}
+      ]
     },
   ];
 
-  void _selectedAnswer() {
+  var _questionIndex = 0;
+  var _totalScore = 0;
+
+  void _selectAnswer(int score) {
     setState(() {
-      _questionIndex = _questionIndex + 1;
+      _totalScore += score;
+      _questionIndex += 1;
+    });
+  }
+
+  void _resetQuiz() {
+    setState(() {
+      _totalScore = 0;
+      _questionIndex = 0;
     });
   }
 
@@ -42,18 +66,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("Complete Guide Basics"),
         ),
-        body: Column(
-          children: <Widget>[
-            Question(
-              _questions[_questionIndex]['questionText'],
-            ),
-            ...(_questions[_questionIndex]['answers'] as List<String>)
-                .map(
-                  (answer) => Answer(_selectedAnswer, answer),
-                )
-                .toList()
-          ],
-        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                questionIndex: _questionIndex,
+                questions: _questions,
+                selectAnswer: _selectAnswer,
+              )
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
