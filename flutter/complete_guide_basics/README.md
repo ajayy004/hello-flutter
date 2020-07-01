@@ -1,5 +1,7 @@
 # complete_guide_basics
 
+## Code
+
 ### Ex-1
 
 ```dart
@@ -78,3 +80,24 @@ void main() {
   print("hello basics");
 }
 ```
+
+## It’s All Widgets!
+
+- AppBar
+  > A typical AppBar with a title, actions, and an overflow dropdown menu.
+- Scaffold
+  > Scaffold class gives out of the box basic style and features
+- Text
+  > The Text widget lets you create a run of styled text.
+- Column
+  > A Column widget arranges its children vertically.
+- Row
+  > A Row widget arranges its children horizontally.
+- Container
+  > Containers are widgets that wrap around other child widgets to define their style/position properties.
+- Wrap
+  > A Wrap Widget is smart, can be used to wrap multiple Widgets
+- RaisedButton
+- Icon
+- Image
+- Placeholder
