@@ -1,5 +1,5 @@
 # hello-world
-> Expore and learn
+> Explore and learn
 
 ## Outline
 
