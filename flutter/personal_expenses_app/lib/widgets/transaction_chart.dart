@@ -40,16 +40,23 @@ class TransactionChart extends StatelessWidget {
     return Card(
       elevation: 5,
       margin: EdgeInsets.all(10),
-      child: Row(
-        children: groupedTransactionValues.map((data) {
-          return ChartBar(
-            data['day'],
-            data['amount'],
-            totalSpending == 0.0
-                ? totalSpending
-                : (data['amount'] as double) / totalSpending,
-          );
-        }).toList(),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactionValues.map((data) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                data['day'],
+                data['amount'],
+                totalSpending == 0.0
+                    ? totalSpending
+                    : (data['amount'] as double) / totalSpending,
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
