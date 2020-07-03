@@ -24,12 +24,16 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(
+    String title,
+    double amount,
+    DateTime choosenDate,
+  ) {
     final newTxn = Transaction(
       id: '${_userTransaction.length + 1}',
       amount: amount,
       title: title,
-      date: DateTime.now(),
+      date: choosenDate,
     );
 
     setState(() {
@@ -66,6 +70,9 @@ class _HomePageState extends State<HomePage> {
                 fontFamily: 'OpenSans',
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
+              ),
+              button: TextStyle(
+                color: Colors.white,
               ),
             ),
         appBarTheme: AppBarTheme(
