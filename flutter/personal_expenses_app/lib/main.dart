@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     DateTime choosenDate,
   ) {
     final newTxn = Transaction(
-      id: '${_userTransaction.length + 1}',
+      id: DateTime.now().toString(),
       amount: amount,
       title: title,
       date: choosenDate,
@@ -56,6 +56,12 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
+  }
+
+  void _deleteTransaction(String txnId) {
+    setState(() {
+      _userTransaction.removeWhere((txn) => txn.id == txnId);
+    });
   }
 
   @override
@@ -99,7 +105,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: <Widget>[
               TransactionChart(_recentTranasction),
-              TransactionList(_userTransaction)
+              TransactionList(_userTransaction, _deleteTransaction)
             ],
           ),
         ),
