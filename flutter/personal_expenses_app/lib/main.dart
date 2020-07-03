@@ -1,10 +1,22 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+
 import './widgets/transaction_chart.dart';
 import './widgets/transaction_list.dart';
 import './widgets/transaction_add.dart';
 import './models/transaction.dart';
 
-void main() => runApp(HomePage());
+void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
+  runApp(HomePage());
+}
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,6 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransaction = [];
+  bool showChart = true;
 
   List<Transaction> get _recentTranasction {
     return _userTransaction.where((txn) {
@@ -104,18 +117,34 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Show Chart'),
+                  Switch.adaptive(
+                    value: showChart,
+                    onChanged: (val) {
+                      setState(() {
+                        showChart = val;
+                      });
+                    },
+                  ),
+                ],
+              ),
               TransactionChart(_recentTranasction),
               TransactionList(_userTransaction, _deleteTransaction)
             ],
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Builder(
-          builder: (bContext) => FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () => _startNewTransaction(bContext),
-          ),
-        ),
+        floatingActionButton: Platform.isIOS
+            ? Container()
+            : Builder(
+                builder: (bContext) => FloatingActionButton(
+                  child: Icon(Icons.add),
+                  onPressed: () => _startNewTransaction(bContext),
+                ),
+              ),
       ),
     );
   }
