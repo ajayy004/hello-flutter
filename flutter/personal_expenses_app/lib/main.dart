@@ -14,6 +14,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransaction = [];
 
+  List<Transaction> get _recentTranasction {
+    return _userTransaction.where((txn) {
+      return txn.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addNewTransaction(String title, double amount) {
     final newTxn = Transaction(
       id: '${_userTransaction.length + 1}',
@@ -81,7 +91,7 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TransactionChart(),
+              TransactionChart(_recentTranasction),
               TransactionList(_userTransaction)
             ],
           ),
