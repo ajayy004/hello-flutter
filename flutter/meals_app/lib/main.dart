@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import './category_meal_screen.dart';
 
 import './category_screen.dart';
 
@@ -32,7 +33,10 @@ class MyApp extends StatelessWidget {
             ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CategoryScreen(),
+      routes: {
+        '/': (ctx) => CategoryScreen(),
+        CategoryMealScreen.routeName: (ctx) => CategoryMealScreen(),
+      },
     );
   }
 }
