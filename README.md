@@ -12,3 +12,4 @@
 - [x] More widgets styling, app logic, [personal-expenses-app](/flutter/personal_expenses_app)
 - [x] Responsive & Adaptive UI, [personal-expenses-app](/flutter/personal_expenses_app)
 - [x] Widget & Flutter internals, [widget-flutter-internals](/flutter/widget_flutter_internals)
+- [ ] Navigation & Multiple screens, [meals-app](/flutter/meals_app)
