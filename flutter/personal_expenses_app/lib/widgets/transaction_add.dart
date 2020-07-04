@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
+import './adaptive_text_field.dart';
+
 class TransactionAdd extends StatefulWidget {
   final Function addNewTransaction;
 
@@ -60,16 +62,17 @@ class _TransactionAddState extends State<TransactionAdd> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: 'Title'),
-                controller: _titleControler,
-                onSubmitted: (_) => _submit(),
+              AdaptiveText(
+                'Title',
+                _titleControler,
+                TextInputType.text,
+                (_) => _submit(),
               ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Amount'),
-                keyboardType: TextInputType.number,
-                controller: _amountControler,
-                onSubmitted: (_) => _submit(),
+              AdaptiveText(
+                'Amount',
+                _amountControler,
+                TextInputType.number,
+                (_) => _submit(),
               ),
               Container(
                 height: 70,
