@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import './screens/product_overview.dart';
 import './screens/product_detail.dart';
 import './providers/products.dart';
-import 'models/product.dart';
+import './providers/product.dart';
 
 void main() {
   runApp(MyApp());
