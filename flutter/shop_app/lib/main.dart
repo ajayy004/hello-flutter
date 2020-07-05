@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './screens/product_overview.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -13,14 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Shop App Demo'),
-        ),
-        body: Center(
-          child: Text('shop-app'),
-        ),
-      ),
+      home: ProductOverViewScreen(),
     );
   }
 }
