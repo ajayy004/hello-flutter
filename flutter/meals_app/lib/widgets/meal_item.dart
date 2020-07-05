@@ -134,7 +134,7 @@ class MealItem extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Icon(
-                        Icons.work,
+                        Icons.attach_money,
                         color: Theme.of(context).primaryColor,
                       ),
                       SizedBox(width: 6),
