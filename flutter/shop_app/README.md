@@ -1,16 +1,36 @@
 # shop_app
 
-A new Flutter project.
+- Inheritance ("extends") vs Mixins ("with")
 
-## Getting Started
+```dart
+mixin Agility {
+  final int speed = 20;
 
-This project is a starting point for a Flutter application.
+  void sitDown() {
+    print('Sitting down...');
+  }
+}
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+class Mammal {
+  void breathe() {
+    print('Breathe in... breathe out...');
+  }
+}
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+class Person extends Mammal with Agility {
+  String name;
+  int age;
+
+  Person(this.name, this.age);
+}
+
+void main() {
+  final p1 = Person('P1', 20);
+  print(p1.name);
+  p1.breathe();
+  print(p1.speed);
+  p1.sitDown();
+
+}
+```

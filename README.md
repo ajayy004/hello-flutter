@@ -14,3 +14,4 @@
 - [x] Widget & Flutter internals, [widget-flutter-internals](/flutter/widget_flutter_internals)
 - [x] Navigation & Multiple screens, [meals-app](/flutter/meals_app)
 - [ ] State Management, [shop-app](/flutter/shop_app)
+  - Inheritance ("extends") vs Mixins ("with")
