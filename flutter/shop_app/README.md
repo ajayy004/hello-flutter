@@ -1,6 +1,6 @@
 # shop_app
 
-- Inheritance ("extends") vs Mixins ("with")
+### Inheritance ("extends") vs Mixins ("with")
 
 ```dart
 mixin Agility {
@@ -34,3 +34,9 @@ void main() {
 
 }
 ```
+
+### Provider with context or value
+
+- If nothing based on context then go for value
+- If based on context then go with create
+- In case of re-use inside app, you can go with value provider method
