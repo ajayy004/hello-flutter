@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:provider/provider.dart';
+import '../providers/cart.dart';
 
 import '../widgets/product_grid.dart';
 
@@ -23,6 +25,16 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
       appBar: AppBar(
         title: Text('MyShop'),
         actions: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
+          ),
+          Consumer<Cart>(
+            builder: (ctx, cart, child) => Text("${cart.cartItemCount}"),
+          ),
           PopupMenuButton(
             onSelected: (FilterOptions selectedVal) {
               setState(() {
@@ -44,7 +56,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
                 value: FilterOptions.All,
               ),
             ],
-          )
+          ),
         ],
       ),
       body: ProductGrid(_showOnlyFavorite),
