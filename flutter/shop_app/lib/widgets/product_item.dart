@@ -47,7 +47,7 @@ class ProductItem extends StatelessWidget {
           //   onPressed: product.toggleFavoriteStatus,
           // ),
           trailing: IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.add_shopping_cart),
             color: Theme.of(context).accentColor,
             onPressed: () {},
           ),
