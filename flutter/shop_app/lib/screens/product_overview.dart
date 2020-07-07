@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:provider/provider.dart';
+import 'package:shop_app/screens/cart_screen.dart';
 import '../providers/cart.dart';
 
 import '../widgets/product_grid.dart';
@@ -26,7 +27,9 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
         title: Text('MyShop'),
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(CartScreen.routeName);
+            },
             icon: Icon(
               Icons.shopping_cart,
               color: Colors.white,
