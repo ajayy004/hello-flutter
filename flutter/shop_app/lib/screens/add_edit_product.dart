@@ -32,11 +32,13 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
   }
 
   void _saveForms() {
-    _formKey.currentState.save();
-    print(_editedProduct.title);
-    print(_editedProduct.price);
-    print(_editedProduct.description);
-    print(_editedProduct.imageUrl);
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      print(_editedProduct.title);
+      print(_editedProduct.price);
+      print(_editedProduct.description);
+      print(_editedProduct.imageUrl);
+    }
   }
 
   @override
@@ -63,6 +65,12 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_priceFocusNode);
+                },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter title';
+                  }
+                  return null;
                 },
                 onSaved: (value) {
                   _editedProduct = Product(
