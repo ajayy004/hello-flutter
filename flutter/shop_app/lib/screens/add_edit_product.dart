@@ -101,6 +101,16 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
                     isFavorite: _editedProduct.isFavorite,
                   );
                 },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter price';
+                  } else if (double.tryParse(value) == null) {
+                    return 'Enter valid price';
+                  } else if (double.parse(value) <= 0) {
+                    return 'Enter number greate than 0';
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Description'),
@@ -117,12 +127,32 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
                     isFavorite: _editedProduct.isFavorite,
                   );
                 },
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter description';
+                  } else if (value.length < 10) {
+                    return 'Please enter description greater than 10 char';
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Image URL'),
                 keyboardType: TextInputType.url,
                 textInputAction: TextInputAction.done,
                 controller: _imageUrlController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter image url';
+                  } else if (!value.endsWith('.png') ||
+                      !value.endsWith('.jpg') ||
+                      !value.endsWith('.jepg') ||
+                      !value.contains('https')) {
+                    return 'Please enter valid url for png/jepg/jpg image';
+                  }
+
+                  return null;
+                },
                 onSaved: (value) {
                   _editedProduct = Product(
                     title: _editedProduct.title,
