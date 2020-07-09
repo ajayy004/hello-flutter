@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/providers/product.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/product.dart';
+import '../providers/products.dart';
 
 class AddEditPrductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
@@ -12,6 +15,7 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
   final _descriptionFocusNode = FocusNode();
   final _imageUrlController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _init = true;
 
   var _editedProduct = Product(
     id: null,
@@ -21,6 +25,40 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
     imageUrl: '',
     isFavorite: false,
   );
+
+  var _initValues = {
+    'title': '',
+    'description': '',
+    'price': '',
+    'imageUrl': '',
+  };
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_init) {
+      final productId = ModalRoute.of(context).settings.arguments as String;
+
+      if (!productId.isEmpty) {
+        _editedProduct =
+            Provider.of<Products>(context, listen: false).findById(productId);
+
+        _initValues = {
+          'title': _editedProduct.title,
+          'description': _editedProduct.description,
+          'price': _editedProduct.price.toString(),
+          'imageUrl': _editedProduct.imageUrl,
+        };
+        _imageUrlController.text = _editedProduct.imageUrl;
+      }
+    }
+    _init = false;
+    super.didChangeDependencies();
+  }
 
   // To avoid memory leak
   @override
@@ -34,16 +72,20 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
   void _saveForms() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      print(_editedProduct.title);
-      print(_editedProduct.price);
-      print(_editedProduct.description);
-      print(_editedProduct.imageUrl);
+
+      if (_editedProduct.id != null) {
+        Provider.of<Products>(context, listen: false)
+            .updateProduct(_editedProduct);
+      } else {
+        Provider.of<Products>(context, listen: false)
+            .addProduct(_editedProduct);
+      }
+      Navigator.of(context).pop();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    print(_imageUrlController.text);
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Product'),
@@ -61,6 +103,7 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
           child: ListView(
             children: <Widget>[
               TextFormField(
+                initialValue: _editedProduct.title,
                 decoration: InputDecoration(labelText: 'Title'),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
@@ -84,6 +127,7 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
                 },
               ),
               TextFormField(
+                initialValue: _initValues['price'],
                 decoration: InputDecoration(labelText: 'Price'),
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -113,6 +157,7 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
                 },
               ),
               TextFormField(
+                initialValue: _initValues['description'],
                 decoration: InputDecoration(labelText: 'Description'),
                 maxLines: 3,
                 keyboardType: TextInputType.multiline,
@@ -144,10 +189,9 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Please enter image url';
-                  } else if (!value.endsWith('.png') ||
-                      !value.endsWith('.jpg') ||
-                      !value.endsWith('.jepg') ||
-                      !value.contains('https')) {
+                  } else if (!(value.endsWith('.png') ||
+                      value.endsWith('.jpg') ||
+                      value.startsWith('https'))) {
                     return 'Please enter valid url for png/jepg/jpg image';
                   }
 
