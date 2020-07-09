@@ -136,6 +136,10 @@ class Products with ChangeNotifier {
       final dataSet = json.decode(data.body) as Map<String, dynamic>;
       List<Product> loadedProducts = [];
 
+      if (dataSet == null) {
+        return;
+      }
+
       dataSet.forEach((prodId, prodData) {
         loadedProducts.add(Product(
             id: prodId,
