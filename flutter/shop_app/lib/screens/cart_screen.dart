@@ -41,17 +41,7 @@ class CartScreen extends StatelessWidget {
                     ),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
-                  FlatButton(
-                    child: Text('Order Now'),
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: () {
-                      Provider.of<Orders>(context, listen: false).addOrder(
-                        cartProvider.items.values.toList(),
-                        cartProvider.totalAmount,
-                      );
-                      cartProvider.clearCart();
-                    },
-                  )
+                  OrderButton(cartProvider: cartProvider)
                 ],
               ),
             ),
@@ -74,6 +64,48 @@ class CartScreen extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class OrderButton extends StatefulWidget {
+  const OrderButton({
+    Key key,
+    @required this.cartProvider,
+  }) : super(key: key);
+
+  final Cart cartProvider;
+
+  @override
+  _OrderButtonState createState() => _OrderButtonState();
+}
+
+class _OrderButtonState extends State<OrderButton> {
+  var _isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      child: _isLoading ? CircularProgressIndicator() : Text('Order Now'),
+      textColor: Theme.of(context).primaryColor,
+      onPressed: widget.cartProvider.totalAmount <= 0 || _isLoading
+          ? null
+          : () {
+              setState(() {
+                _isLoading = true;
+              });
+              Provider.of<Orders>(context, listen: false)
+                  .addOrder(
+                widget.cartProvider.items.values.toList(),
+                widget.cartProvider.totalAmount,
+              )
+                  .then((_) {
+                setState(() {
+                  _isLoading = false;
+                });
+              });
+              widget.cartProvider.clearCart();
+            },
     );
   }
 }
