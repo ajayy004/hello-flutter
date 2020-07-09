@@ -13,5 +13,7 @@
 - [x] Responsive & Adaptive UI, [personal-expenses-app](/flutter/personal_expenses_app)
 - [x] Widget & Flutter internals, [widget-flutter-internals](/flutter/widget_flutter_internals)
 - [x] Navigation & Multiple screens, [meals-app](/flutter/meals_app)
-- [ ] State Management, [shop-app](/flutter/shop_app)
+- [x] State Management, [shop-app](/flutter/shop_app)
   - Inheritance ("extends") vs Mixins ("with")
+- [x] User input & forms, [shop-app](/flutter/shop_app)
+- [ ] Sending http requests, [shop-app](/flutter/shop_app)
