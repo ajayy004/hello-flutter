@@ -72,7 +72,8 @@ class Orders with ChangeNotifier {
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
     try {
       final timestamp = DateTime.now();
-      const url = '${constants.hostUrl}/orders.json';
+      final url = '${constants.hostUrl}/orders.json?auth=$authToken';
+      print(url);
 
       final response = await http.post(
         url,
