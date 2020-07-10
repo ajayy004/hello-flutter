@@ -7,10 +7,12 @@ import './screens/product_detail.dart';
 import './screens/orders_screen.dart';
 import './screens/user_products_screen.dart';
 import './screens/add_edit_product.dart';
+import './screens/auth_screen.dart';
 
 import './providers/orders.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
+import './providers/auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +23,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => Auth(),
+        ),
         ChangeNotifierProvider(
           create: (ctx) => Products(),
         ),
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Lato',
         ),
-        home: ProductOverViewScreen(),
+        home: AuthScreen(), //ProductOverViewScreen
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
           CartScreen.routeName: (ctx) => CartScreen(),
