@@ -86,7 +86,6 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
           });
           Navigator.of(context).pop();
         }).catchError((error) {
-          print(error.toString());
           setState(() {
             _isLoading = false;
           });
@@ -95,7 +94,6 @@ class _AddEditPrductScreenState extends State<AddEditPrductScreen> {
         Provider.of<Products>(context, listen: false)
             .addProduct(_editedProduct)
             .catchError((error) {
-          print(error.toString());
           showDialog(
             context: context,
             builder: (ctx) => AlertDialog(

@@ -7,6 +7,10 @@ import '../util/constants.dart' as constants;
 import './product.dart';
 
 class Products with ChangeNotifier {
+  final String authToken;
+
+  Products(this.authToken, this._items);
+
   List<Product> _items = [
     // Product(
     //   id: 'p1',
@@ -51,7 +55,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) {
-    const url = '${constants.hostUrl}/products.json';
+    final url = '${constants.hostUrl}/products.json?auth=$authToken';
     return http
         .post(
       url,
@@ -86,7 +90,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> updateProduct(Product newProduct) {
-    final url = '${constants.hostUrl}/products/${newProduct.id}.json';
+    final url =
+        '${constants.hostUrl}/products/${newProduct.id}.json?auth=$authToken';
     return http
         .patch(
       url,
@@ -112,7 +117,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final String url = '${constants.hostUrl}/products/${id}.json';
+    final String url =
+        '${constants.hostUrl}/products/${id}.json?auth=$authToken';
 
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     var existingProduct = _items[existingProductIndex];
@@ -125,12 +131,13 @@ class Products with ChangeNotifier {
       notifyListeners();
       throw HttpException('Unable to delete product: $id');
     }
+    notifyListeners();
 
     existingProduct = null;
   }
 
   Future<void> fetchAndSetProducts() {
-    const url = '${constants.hostUrl}/products.json';
+    final url = '${constants.hostUrl}/products.json?auth=${authToken}';
 
     return http.get(url).then((data) {
       final dataSet = json.decode(data.body) as Map<String, dynamic>;

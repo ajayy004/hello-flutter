@@ -20,7 +20,10 @@ class OrderItem {
 }
 
 class Orders with ChangeNotifier {
+  String authToken;
   List<OrderItem> _orders = [];
+
+  Orders(this.authToken, this._orders);
 
   List<OrderItem> get orders {
     return [..._orders];
@@ -28,7 +31,7 @@ class Orders with ChangeNotifier {
 
   Future<void> getOrders() async {
     try {
-      const url = '${constants.hostUrl}/orders.json';
+      final url = '${constants.hostUrl}/orders.json?auth=$authToken';
       final response = await http.get(url);
       final List<OrderItem> loadedOrders = [];
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -99,6 +102,7 @@ class Orders with ChangeNotifier {
       notifyListeners();
     } catch (error) {
       print(error.toString);
+      throw error;
     }
   }
 }

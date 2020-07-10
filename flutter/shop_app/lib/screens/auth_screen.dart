@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
+import '../models/http_exception.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -101,6 +102,24 @@ class _AuthCardState extends State<AuthCard> {
   var _isLoading = false;
   final _passwordController = TextEditingController();
 
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Error Occurreed'),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
   Future<void> _submit() async {
     if (!_formKey.currentState.validate()) {
       // Invalid!
@@ -111,25 +130,48 @@ class _AuthCardState extends State<AuthCard> {
       _isLoading = true;
     });
 
-    if (_authMode == AuthMode.Login) {
-      // Log user in
-      await Provider.of<Auth>(
-        context,
-        listen: false,
-      ).login(
-        _authData['email'],
-        _authData["password"],
-      );
-    } else {
-      // Sign user up
-      await Provider.of<Auth>(
-        context,
-        listen: false,
-      ).signup(
-        _authData['email'],
-        _authData["password"],
-      );
+    try {
+      if (_authMode == AuthMode.Login) {
+        // Log user in
+        await Provider.of<Auth>(
+          context,
+          listen: false,
+        ).login(
+          _authData['email'],
+          _authData["password"],
+        );
+      } else {
+        // Sign user up
+        await Provider.of<Auth>(
+          context,
+          listen: false,
+        ).signup(
+          _authData['email'],
+          _authData["password"],
+        );
+      }
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed';
+      switch (error.message) {
+        case 'EMAIL_NOT_FOUND':
+          errorMessage = 'Email Not found';
+          break;
+          break;
+        case 'INVALID_PASSWORD':
+          errorMessage = 'Email/Password is not correct';
+          break;
+        case 'USER_DISABLED':
+          errorMessage = 'Account disabled';
+          break;
+        default:
+          errorMessage = error.message;
+      }
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      var errorMessage = 'Could not authenticate you, please try again later';
+      _showErrorDialog(errorMessage);
     }
+
     setState(() {
       _isLoading = false;
     });

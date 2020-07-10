@@ -24,7 +24,7 @@ class OrderScreen extends StatelessWidget {
             );
           } else {
             if (dataSnapshot.error != null) {
-              Center(
+              return Center(
                 child: Text('An Error'),
               );
             } else {

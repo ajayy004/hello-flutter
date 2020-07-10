@@ -1,13 +1,29 @@
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../models/http_exception.dart';
 import '../util/constants.dart' as constants;
 
 class Auth with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
   String _userId;
+
+  bool get isAuth {
+    return token != null;
+  }
+
+  String get token {
+    if (_expiryDate != null &&
+        _expiryDate.isAfter(DateTime.now()) &&
+        _token != null) {
+      return _token;
+    }
+    return null;
+  }
 
   Future<void> _authenticate(
     String email,
@@ -25,10 +41,52 @@ class Auth with ChangeNotifier {
           "returnSecureToken": true,
         }),
       );
-      return json.decode(response.body);
+
+      final responseData = json.decode(response.body);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
+      _token = responseData['idToken'];
+      _userId = responseData['localId'];
+      _expiryDate = DateTime.now().add(
+        Duration(
+          seconds: int.parse(
+            responseData['expiresIn'],
+          ),
+        ),
+      );
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final userData = json.encode({
+        "token": _token,
+        "userId": _userId,
+        "expireDate": _expiryDate.toIso8601String()
+      });
+      prefs.setString("userData", userData);
     } catch (error) {
       throw error;
     }
+  }
+
+  Future<bool> tryAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('userData')) {
+      return false;
+    }
+
+    final extractedUserData =
+        json.decode(prefs.get('userData')) as Map<String, Object>;
+    final expireDate = DateTime.parse(extractedUserData['expireDate']);
+
+    if (expireDate.isBefore(DateTime.now())) {
+      return false;
+    }
+
+    _token = extractedUserData['token'];
+    _userId = extractedUserData['userId'];
+    _expiryDate = expireDate;
+    notifyListeners();
+    return true;
   }
 
   Future<void> signup(String email, String password) async {
