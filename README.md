@@ -17,4 +17,4 @@
   - Inheritance ("extends") vs Mixins ("with")
 - [x] User input & forms, [shop-app](/flutter/shop_app)
 - [x] Sending http requests, [shop-app](/flutter/shop_app)
-- [ ] User authentications
+- [x] User authentications
