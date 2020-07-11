@@ -4,7 +4,7 @@
 
 ## Outline
 
-### Flutter Outline
+### Flutter Basics Outline
 
 - [x] Getting started, [hello-world](/flutter/hello_world)
 - [x] Basics, [complete-guide-basics](/flutter/complete_guide_basics)
@@ -19,11 +19,33 @@
 - [x] Sending http requests, [shop-app](/flutter/shop_app)
 - [x] User authentications, [shop-app](/flutter/shop_app)
 - [x] Animations, [shop-app](/flutter/shop_app)
-- [ ] Architect Patterns
-  - [ ] BLOC pattern
-    - [ ] Overview
-    - [ ] Compile time Dependency Injection
-    - [ ] Integration and Unit testing
 - [ ] Using Device features
 - [ ] Running on Native Device code
 - [ ] Publishing an App
+- [ ] Architect Patterns or State Management Approaches
+  - [ ] Vanilla
+  - [ ] InheritedWidget & InheritedModel
+  - [ ] ChangeNotifier + Provider 
+  - [ ] Scoped Model
+  - [ ] BLoC
+  - [ ] Bloc Library
+  - [ ] Reactive Programming - Streams - BLoC
+  - [ ] Redux
+  - [ ] MobX
+  
+- [ ] Compile time Dependency Injection
+- [ ] Integration and Unit testing
+
+
+
+## How to Implement the Architecture in Flutter: Benefits and Best Practices
+  - [ ] Vanilla
+  - [ ] InheritedWidget & InheritedModel
+  - [ ] ChangeNotifier + Provider 
+  - [ ] Scoped Model
+  - [ ] BLoC
+  - [ ] Bloc Library
+  - [ ] Reactive Programming - Streams - BLoC
+  - [ ] Redux
+  - [ ] MobX
+
