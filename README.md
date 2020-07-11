@@ -17,4 +17,8 @@
   - Inheritance ("extends") vs Mixins ("with")
 - [x] User input & forms, [shop-app](/flutter/shop_app)
 - [x] Sending http requests, [shop-app](/flutter/shop_app)
-- [x] User authentications
+- [x] User authentications, [shop-app](/flutter/shop_app)
+- [x] Animations, [shop-app](/flutter/shop_app)
+- [ ] Using Device features
+- [ ] Running on Native Device code
+- [ ] Publishing an App
