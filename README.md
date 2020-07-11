@@ -19,14 +19,18 @@
 - [x] Sending http requests, [shop-app](/flutter/shop_app)
 - [x] User authentications, [shop-app](/flutter/shop_app)
 - [x] Animations, [shop-app](/flutter/shop_app)
-- [] Architect Patterns
+- [ ] Architect Patterns
+  - [ ] BLOC pattern
+    - [ ] Overview
+    - [ ] Compile time Dependency Injection
+    - [ ] Integration and Unit testing
 - [ ] Using Device features
 - [ ] Running on Native Device code
 - [ ] Publishing an App
 
 
 #### Architect Patterns
-- [] BLOC pattern
-  - [] Overview
-  - [] Compile time Dependency Injection
-  - [] Integration and Unit testing
+- [ ] BLOC pattern
+  - [ ] Overview
+  - [ ] Compile time Dependency Injection
+  - [ ] Integration and Unit testing
