@@ -20,32 +20,32 @@
 - [x] User authentications, [shop-app](/flutter/shop_app)
 - [x] Animations, [shop-app](/flutter/shop_app)
 - [ ] Using Device features
+  - Sqlite, Map and Navigation
 - [ ] Running on Native Device code
 - [ ] Publishing an App
 - [ ] Architect Patterns or State Management Approaches
+
   - [ ] Vanilla
   - [ ] InheritedWidget & InheritedModel
-  - [ ] ChangeNotifier + Provider 
+  - [ ] ChangeNotifier + Provider
   - [ ] Scoped Model
   - [ ] BLoC
   - [ ] Bloc Library
   - [ ] Reactive Programming - Streams - BLoC
   - [ ] Redux
   - [ ] MobX
-  
+
 - [ ] Compile time Dependency Injection
 - [ ] Integration and Unit testing
 
-
-
 ## How to Implement the Architecture in Flutter: Benefits and Best Practices
-  - [ ] Vanilla
-  - [ ] InheritedWidget & InheritedModel
-  - [ ] ChangeNotifier + Provider 
-  - [ ] Scoped Model
-  - [ ] BLoC
-  - [ ] Bloc Library
-  - [ ] Reactive Programming - Streams - BLoC
-  - [ ] Redux
-  - [ ] MobX
 
+- [ ] Vanilla
+- [ ] InheritedWidget & InheritedModel
+- [ ] ChangeNotifier + Provider
+- [ ] Scoped Model
+- [ ] BLoC
+- [ ] Bloc Library
+- [ ] Reactive Programming - Streams - BLoC
+- [ ] Redux
+- [ ] MobX
