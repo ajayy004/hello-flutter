@@ -20,7 +20,7 @@
 - [x] User authentications, [shop-app](/flutter/shop_app)
 - [x] Animations, [shop-app](/flutter/shop_app)
 - [ ] Using Device features
-  - Sqlite, Map and Navigation
+  - [ ] Sqlite, Map and Navigation
 - [ ] Running on Native Device code
 - [ ] Publishing an App
 - [ ] Architect Patterns or State Management Approaches
