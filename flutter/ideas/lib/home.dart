@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './widgets/safe_area.dart';
+import './widgets/sliver_app_bar.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -32,6 +33,17 @@ class Home extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => IdeaSafeArea(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('SliverAppBar'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => IdeaSliverAppBar(),
                   ),
                 );
               },

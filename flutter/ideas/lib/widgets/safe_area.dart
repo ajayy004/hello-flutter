@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matcher/matcher.dart';
 
 class IdeaSafeArea extends StatefulWidget {
   @override
@@ -15,6 +14,9 @@ class _IdeaSafeAreaState extends State<IdeaSafeArea> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('SafeArea'),
+      ),
       body: SafeArea(
         top: _top,
         left: _left,
