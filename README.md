@@ -49,3 +49,12 @@
 - [ ] Reactive Programming - Streams - BLoC
 - [ ] Redux
 - [ ] MobX
+
+
+### Scala Basics Outline
+- [ ] Getting started
+- [ ] Basics
+- [ ] Object-Oriented Programming
+- [ ] Functional Programming in Scala
+- [ ] Pattern Matching
+- [ ] Small File System
